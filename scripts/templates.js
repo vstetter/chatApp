@@ -12,6 +12,6 @@ templates.userList = [
 
 templates.messageTmpl = [
 '<article data-messageid="<%=_id %>">',
-'<p><%= message %></p>'
+'<p><%= message %></p>',
 
 ].join("");

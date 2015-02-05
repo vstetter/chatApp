@@ -85,7 +85,7 @@ var user = {
       url: user.config.url,
       type: 'GET',
       success: function (user) {
-        console.log(user;
+        console.log(user);
         var template= _.template($('messageTmpl').html());
         var markup = "";
         user.forEach(function (item, idx, arr) {
