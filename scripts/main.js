@@ -7,15 +7,18 @@ $(document).ready(function(){
 var user = {
   init: function(){
     user.initEvents();
+    user.initStyling();
   },
-  initStyling: function(){},
+  initStyling: function(){
+    user.renderUser();
+  },
   initEvents: function(){
 
 
     $('.login').on('submit', function(event){
       event.preventDefault();
         var newUser = {
-          title: $(this).find('input[name="newUser"]').val()
+          user: $(this).find('input[name="newUser"]').val()
         };
       user.createUser(newUser);
     });
@@ -25,6 +28,24 @@ var user = {
       url: 'http://tiy-fee-rest.herokuapp.com/collections/chitChat'
     },
 
+    renderUser: function() {
+    $.ajax({
+      url: user.config.url,
+      type: 'GET',
+      success: function (user) {
+        var template = _.template(templates.userList);
+        var markup = "";
+        user.forEach(function(item, idx, arr){
+          markup += template(item);
+        });
+        console.log('markup is...', markup);
+        $('.userList').html(markup);
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  },
 
     createUser: function(newUser) {
       $.ajax({
@@ -33,7 +54,7 @@ var user = {
       type: 'POST',
       success: function (data) {
         console.log(data, '', 'added!');
-        // toDo.renderItem();
+        user.renderUser();
       },
       error: function (err) {
         console.log(err);
