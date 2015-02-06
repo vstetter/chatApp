@@ -2,16 +2,20 @@ var templates = {};
 
 
 templates.userList = [
-'<article data-itemid="<%= _id %>">',
-'<li>',
-'<h3 class='userName'><%= user.name %></h3>',
-'</li>',
+
+
+
+'<li data-itemid="<%= _id %>">',
+'<h3 class="userName"><%= userName %></h3>',
+'<a class="logout" href="">Log Out</a>',
+'</li>'
+
 
 ].join("");
 
 
 templates.messageTmpl = [
-'<article data-messageid="<%=_id %>">',
-'<p class='userMessage'><%= user.messages %></p>',
+'<p><%= userInfo.userName %></p>',
+'<p class="userMessage"><%= newChatMessage %></p>',
 
 ].join("");

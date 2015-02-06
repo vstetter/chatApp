@@ -1,0 +1,33 @@
+local storage to store things in browser
+
+localStorage;removeItem('nameGiven')
+localStorage.getItem('nameGiven')
+
+
+
+to set item with objects
+var userInfo = {
+userName: "Lindsay",
+_id: "1"
+};
+userinfo.username (gets the username)
+
+localStorage.setItem('randomStuff', 'this is some data');
+
+var strUser = JSON.stringify(userInfo);
+localStorage.setItem('userInfo' strUserInfo);
+
+
+localStorage.getItem('userInfo')
+
+to get just user name
+
+var parsedUserInfo = JSON.parse(localStorage.getItem('userInfo'))
+
+
+parsedUserInfo.username //when needing to use the data
+
+
+
+var userInfo = JSON.stringify(data);
+localStorage.setItem('userInfo', userInfo)
