@@ -13,23 +13,26 @@ var chitChatApp = {
   },
   initStyling: function(){
     chitChatApp.renderUser();
+    // chitChatApp.renderMessage();
+
+    chitChatApp.renderUser();
   },
   initEvents: function(){
+
+    // var storedLogin = JSON.parse(localStorage.getItem('userInfo'));
+
 
     $('.login').on('submit', function(event){
       event.preventDefault();
         var userInfo = {
           userName: $(this).find('input[name="newUser"]').val(),
-          userId: $(this).closest('li').data('itemid'),
-          // userMessages: []
-
+          userId: $(this).closest('li').data('itemid')
         };
         chitChatApp.createUser(userInfo);
         // $(this).css('display', 'none');
         // $(this).siblings().addClass('active');
 
-          var strUserInfo = JSON.stringify(userInfo);
-          localStorage.setItem('userInfo', strUserInfo);
+
     });
 
 
@@ -39,29 +42,26 @@ var chitChatApp = {
       chitChatApp.deleteUser(userId);
 
     });
+
+
+
+    $('#createNewMessage').on('submit', function (event) {
+      event.preventDefault();
+
+      //need to get user profile via itemid (?), so we can add new message into that object
+
+
+      var newChatMessage = $(this).find('input[name="newMessage"]').val();
+
+      chitChatApp.createMessage();
+
+    });
+
+
   },
     config: {
       url: 'http://tiy-fee-rest.herokuapp.com/collections/chitChat'
     },
-    //storing user data locally
-    //   profile: {
-    //     login: JSON.parse(localStorage.getItem('login')),
-    //     messages: []
-    // },
-
-
-    //
-    //   /// RETRIVE USERNAME FROM LOCAL STORAGE ////
-    //  ////////////////////////////////////////////
-    //  var profile = JSON.parse( localStorage.getItem( 'profile' ) );
-    //
-    //  /// IF USER EXISTS IN LOCAL STORAGE HIDE LOGIN FIELD ////
-    // /////////////////////////////////////////////////////////
-    //  if(localStorage.getItem('profile')) {
-    //    $('.login').html(userProfile.user.name);
-    //    $('#enterUserForm').css('display', 'none');
-    //    chatApp.renderAllUsers();
-    //  }
 
 
     renderUser: function() {
@@ -92,6 +92,8 @@ var chitChatApp = {
       success: function (data) {
         console.log(data, '', 'added!');
         chitChatApp.renderUser();
+        var strUserInfo = JSON.stringify(data);
+        localStorage.setItem('userInfo', strUserInfo);
       },
       error: function (err) {
         console.log(err);
@@ -100,6 +102,7 @@ var chitChatApp = {
     $('input').val('');
 
   },
+
 
   deleteUser: function(userId) {
   $.ajax({
@@ -115,66 +118,46 @@ var chitChatApp = {
   });
 },
 
-  //
-  // // ---start create and render message in .chatArea ---//
-  //
-  // //initStyling:
-  // initStyling: function () {
-  //   toDoList.rendertoDoListItem();
-  // },
-  //
-  // //imitEVents:
-  //
-  //
-  // $('#createItem').on('submit', function (event) {
-  //   event.preventDefault();
-  //   var newToDoItem = {
-  //     toDoItem: $(this).find('input[name="newItem"]').val()
-  //   };
-  //   toDoList.createtoDoListItem(newToDoItem);
-  //
-  // });
-  //
-  //
-  //
-  //
-  // rendertoDoListItem: function () {
-  //   $.ajax({
-  //     url: toDoList.config.url,
-  //     type: 'GET',
-  //     success: function (toDoList) {
-  //       console.log(toDoList);
-  //       var template= _.template($('#toDoTmpl').html());
-  //       var markup = "";
-  //       toDoList.forEach(function (item, idx, arr) {
-  //         markup += template(item);
-  //       });
-  //       console.log('markup is ...', markup);
-  //       $('.ActualList').html(markup);
-  //     },
-  //     error: function (err) {
-  //       console.log(err);
-  //     }
-  //   });
-  // },
-  //
-  //
-  // createMessage: function (listItem) {
-  //   $.ajax({
-  //     url: toDoList.config.url,
-  //     data: listItem,
-  //     type: 'POST',
-  //     success: function (data) {
-  //       console.log(data);
-  //       toDoList.rendertoDoListItem();
-  //     },
-  //     error: function (err) {
-  //       console.log(err);
-  //     }
-  //   });
-  // },
-  //
-  //
+
+renderMessage: function () {
+  $.ajax({
+    url: chitChatApp.config.url,
+    type: 'GET',
+    success: function (message) {
+      console.log(message);
+      var template= _.template(templates.messageTmpl);
+      var markup = "";
+      message.forEach(function (item, idx, arr) {
+        markup += template(item);
+      });
+      console.log('markup is ...', markup);
+      $('.chatArea').html(markup);
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+},
+
+
+createMessage: function (newMessage) {
+  $.ajax({
+    url: chitChatApp.config.url, //after url + '/' + id,   ??
+    data: newMessage, //msg
+    type: 'POST',  //PUT?
+    success: function (data) {
+      console.log(data);
+      chitChatApp.renderMessage();
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+}
+
+
+
+
 
 
 };
