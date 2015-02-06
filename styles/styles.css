@@ -1,0 +1,22 @@
+body, h1, h2, h3, h4, h5, h6, p, a, ul, li {
+  padding: 0;
+  margin: 0; }
+
+/* .login {
+  left: 42%;
+  position: fixed;
+  top: 20%;
+  padding: 100px;
+  border-radius: 10%;
+  border: 6px double #260E0E;
+
+} */
+h2 {
+  font-family: "prenton-condensed", sans-serif;
+  border-bottom: 2px solid #260E0E; }
+
+/* .container{
+  display: none;
+} */
+.active {
+  display: block; }

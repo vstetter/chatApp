@@ -2,9 +2,9 @@ var templates = {};
 
 
 templates.userList = [
-'<article data-itemid="<%= _id %>">',
-'<li>',
-'<h3><%= user %></h3>',
-'</li>',
+'<li data-itemid="<%= _id %>">',
+'<h3 class="userName"><%= userName %></h3>',
+'<a class="logout" href="">Log Out</a>',
+'</li>'
 
 ].join("");
