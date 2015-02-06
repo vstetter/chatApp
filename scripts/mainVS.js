@@ -1,37 +1,68 @@
 $(document).ready(function(){
-  user.init();
+  chitChatApp.init();
 
 });
 
 
-var user = {
+var chitChatApp = {
+
+  //add userProfile {
+//   get from localStorage
+//   messages
+// },
+
+
   init: function(){
-    user.initEvents();
-    user.initStyling();
+    chitChatApp.initEvents();
+    chitChatApp.initStyling();
   },
   initStyling: function(){
-    user.renderUser();
-    user.renderMessage();
+
+    chitChatApp.renderUser();
+    chitChatApp.renderMessage();
   },
   initEvents: function(){
 
 
     $('.login').on('submit', function(event){
       event.preventDefault();
+      // create object for each user with user info and messages
         var newUser = {
-          user: $(this).find('input[name="newUser"]').val()
+          user: {
+                name: $(this).find('input[name="newUser"]').val(),
+                // id: cookies, or just use the _id from server? This would later be saved in local storage
+                }
         };
-      user.createUser(newUser);
+
+      chitChatApp.createUser(newUser);
+
+      //store user info to local storage
+      // need to add script
     });
+
 
     $('#createNewMessage').on('submit', function (event) {
       event.preventDefault();
+
+      //need to get user profile via itemid (?), so we can add new message into that object
+
+
       var newChatMessage = {
-        message: $(this).find('input[name="newMessage"]').val()
+        user: {
+          name: //check,
+          messages: $(this).find('input[name="newMessage"]').val()
+        }
       };
-      user.createMessage(newChatMessage);
+
+      chitChatApp.createMessage(//userid, newChatMessage);
 
     });
+
+
+}
+
+
+
 
   },
 
@@ -42,9 +73,11 @@ var user = {
       url: 'http://tiy-fee-rest.herokuapp.com/collections/chitChat'
     },
 
+    //do we need renderAllUsers?
+
     renderUser: function() {
     $.ajax({
-      url: user.config.url,
+      url: chitChatApp.config.url,
       type: 'GET',
       success: function (user) {
         var template = _.template(templates.userList);
@@ -63,7 +96,7 @@ var user = {
 
     createUser: function(newUser) {
       $.ajax({
-      url: user.config.url,
+      url: chitChatApp.config.url,
       data: newUser,
       type: 'POST',
       success: function (data) {
@@ -78,11 +111,11 @@ var user = {
 
   },
 
-
+//do we need renderAllUsers?
 
   renderMessage: function () {
     $.ajax({
-      url: user.config.url,
+      url: chitChatApp.config.url,
       type: 'GET',
       success: function (message) {
         console.log(message);
@@ -101,11 +134,11 @@ var user = {
   },
 
 
-  createMessage: function (id, msg) {
+  createMessage: function (newMessage) {  //id, msg instead of newMessage?
     $.ajax({
-      url: chitChatApp.config.url,
-      data: msg,
-      // type: 'POST', or 'PUT' ???
+      url: chitChatApp.config.url, //after url + '/' + id,   ??
+      data: newMessage, //msg
+      type: 'POST',  //PUT?
       success: function (data) {
         console.log(data);
         chitChatApp.renderMessage();
