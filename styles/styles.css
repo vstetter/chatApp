@@ -2,21 +2,41 @@ body, h1, h2, h3, h4, h5, h6, p, a, ul, li {
   padding: 0;
   margin: 0; }
 
-/* .login {
-  left: 42%;
+.login {
   position: fixed;
   top: 20%;
   padding: 100px;
-  border-radius: 10%;
-  border: 6px double #260E0E;
+  border-radius: 5%;
+  border: 6px double #260E0E; }
 
-} */
+.loginForm {
+  text-align: center; }
+
+h1 {
+  font-family: "prenton-condensed", sans-serif;
+  color: #0D000D;
+  text-shadow: 0.25rem -0.25rem rgba(255, 0, 255, 0.75), -0.25rem -0.25rem rgba(0, 255, 255, 0.75), 0 0.5rem rgba(255, 255, 0, 0.75);
+  text-align: center;
+  font-size: 10em; }
+
 h2 {
   font-family: "prenton-condensed", sans-serif;
   border-bottom: 2px solid #260E0E; }
 
-/* .container{
-  display: none;
-} */
+h3 {
+  font-family: "prenton-condensed", sans-serif;
+  color: #260E0E; }
+
+li {
+  list-style-type: none; }
+
+.container {
+  width: 900px;
+  margin: 30px auto;
+  display: none; }
+
+.userList {
+  float: right; }
+
 .active {
   display: block; }

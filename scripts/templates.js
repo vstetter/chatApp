@@ -15,7 +15,8 @@ templates.userList = [
 
 
 templates.messageTmpl = [
-'<p><%= userName %></p>',
+'<li data-itemid="<%= _id %>">',
+'<p><%=userName %></p>',
 '<p class="userMessage"><%= userMessage %></p>'
 
 ].join("");

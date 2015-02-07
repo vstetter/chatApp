@@ -1,81 +1,76 @@
-$(document).ready(function(){
-  chitChatApp.init();
-
-});
+$(document).ready(function() {
+  chats.init();
 
 
-var chitChatApp = {
+});//end doc ready
 
-  init: function(){
-    chitChatApp.initEvents();
-    chitChatApp.initStyling();
-    setInterval(chitChatApp.renderUser, 1000);
+var chats = {
+  init: function() {
+    chats.initStyling();
+    chats.initEvents();
   },
-  initStyling: function(){
-    chitChatApp.renderUser();
-    chitChatApp.renderMessage();
-
-    // chitChatApp.renderMessage();
+  initStyling: function() {
+    chats.renderChat();
   },
-  initEvents: function(){
-
-
-    $('#createNewMessage').on('.newMessage', function (event) {
+  initEvents: function() {
+    $('.userId').on('submit', function(event){
       event.preventDefault();
-      var newChatMessage = {
-        userName: userInfo.username,
-        message: $(this).find('input[name="newMessage"]').val()
-
-      };
-
-      chitChatApp.createMessage();
-
+      var input = $('#userInput').val();
+      localStorage.setItem('userId', input);
+      console.log(input);
+      $('.userId').removeClass('show');
     });
 
-},
-config: {
-  url: 'http://tiy-fee-rest.herokuapp.com/collections/chitChat5'
-},
+    //on click of send msg button trigger these events
+    $('#create').on('submit', function(event){
+      event.preventDefault();
+      var newMessage = {
+        userId: "localStorage.getItem('userId')",
+        message: $(this).find('input[name="message"]').val()
+      };//end of newMessage variable
+      chats.createMessage(newMessage);
 
+    });//end submit event for .sendMessage button
+  },
+  config: {
+    url:'http://tiy-fee-rest.herokuapp.com/collections/chatInTheBox',
+  },
 
-
-renderMessage: function () {
-  $.ajax({
-    url: chitChatApp.config.url,
-    type: 'GET',
-    success: function (message) {
-      console.log(message);
-      var template= _.template(templates.messageTmpl);
-      var markup = "";
-      message.forEach(function (item, idx, arr) {
-        markup += template(item);
-      });
-      console.log('MESSAGE..', markup);
-      $('.chatArea').html(markup);
-    },
-    error: function (err) {
-      console.log(err);
-    }
-  });
-},
-
-
-createMessage: function (newMessage) {
-  $.ajax({
-    url: chitChatApp.config.url, //after url + '/' + id,   ??
-    data: newMessage, //msg
-    type: 'POST',  //PUT?
-    success: function (data) {
+  renderChat: function(){
+    $.ajax({
+      url: chats.config.url,
+      type: 'GET',
+      success: function(chats) { //passes info through function and it is added into empty string
+        console.log(chats)
+        var template= _.template($('#chatTmpl').html());
+        var markup = "";
+        chats.forEach(function(item, idx, arr){
+          markup +=template(item);
+        });//end forEach
+        console.log('markup is....', markup);
+        $('article').html(markup);
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });//end ajax for render
+    //set timeout to auto refresh page
+  },
+  createMessage: function(message) {
+    $.ajax({
+      url: chats.config.url,
+      data: message,
+      userName: "localStorage.getItem('userId')",
+      type: 'POST', //request to add info to server and will appear when render function is run
+    success: function(data) {
       console.log(data);
-      chitChatApp.renderMessage();
+      chats.renderChat(); //reload chat if new data is received
     },
-    error: function (err) {
-      console.log(err);
+    error: function(err) {
+      console.log(err); //oops
     }
-  });
-}
+  });//end createMessage ajax
+  }
 
 
-
-
-};
+};//end chats methods

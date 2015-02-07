@@ -3,26 +3,57 @@ body, h1, h2, h3, h4, h5, h6, p, a, ul, li {
   margin: 0;
 }
 
-/* .login {
-  left: 42%;
+.login {
   position: fixed;
   top: 20%;
   padding: 100px;
-  border-radius: 10%;
+  border-radius: 5%;
   border: 6px double #260E0E;
 
-} */
+}
+
+.loginForm {
+  text-align: center;
+}
+
+h1 {
+  font-family: $head-font;
+  color: $blue;
+  text-shadow:  0.25rem -0.25rem rgba(magenta, 0.75),
+               -0.25rem -0.25rem rgba(cyan, 0.75),
+                0        0.5rem  rgba(yellow, 0.75);
+  text-align: center;
+  font-size: 10em;
+}
+
 
 h2 {
   font-family: $head-font;
   border-bottom: 2px solid $head-font-color;
 }
 
+h3 {
+  font-family: $head-font;
+  color: $head-font-color;
+}
+
+li {
+  list-style-type: none;
+}
+.container {
+  width: 900px;
+  margin: 30px auto;
+  display: none;
+}
+
+.userList {
+  float: right;
+}
+
+
 
 //JQUERY
-/* .container{
-  display: none;
-} */
+
 .active {
   display: block;
 }
