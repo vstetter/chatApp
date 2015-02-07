@@ -201,6 +201,14 @@ var chitChatApp = {
         var strMessage = JSON.stringify(data);
         localStorage.setItem('newMessage', strMessage);
 
+        data.forEach(function(item, idx, arr){
+          messageArray.push(userMessage);
+
+
+        });
+
+        console.log(messageArray);
+
 
       },
       error: function(err) {
