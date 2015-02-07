@@ -15,7 +15,7 @@ templates.userList = [
 
 
 templates.messageTmpl = [
-'<p><%= userInfo.userName %></p>',
-'<p class="userMessage"><%= newChatMessage %></p>',
+'<p><%= userName %></p>',
+'<p class="userMessage"><%= userMessage %></p>'
 
 ].join("");

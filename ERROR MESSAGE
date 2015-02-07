@@ -1,0 +1,3 @@
+
+tiy-fee-rest.herokuapp.com/collections/chitChatMessage:1 PUT http://tiy-fee-rest.herokuapp.com/collections/chitChatMessage 404 (Not Found)
+main.js:173 Object {readyState: 4, getResponseHeader: function, getAllResponseHeaders: function, setRequestHeader: function, overrideMimeType: function…}

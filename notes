@@ -31,3 +31,27 @@ parsedUserInfo.username //when needing to use the data
 
 var userInfo = JSON.stringify(data);
 localStorage.setItem('userInfo', userInfo)
+
+
+    //storing user data locally
+    //   profile: {
+    //     login: JSON.parse(localStorage.getItem('login')),
+    //     messages: []
+    // },
+
+
+    //
+    //   /// RETRIVE USERNAME FROM LOCAL STORAGE ////
+    //  ////////////////////////////////////////////
+    //  var profile = JSON.parse( localStorage.getItem( 'profile' ) );
+    //
+    //  /// IF USER EXISTS IN LOCAL STORAGE HIDE LOGIN FIELD ////
+    // /////////////////////////////////////////////////////////
+    //  if(localStorage.getItem('profile')) {
+    //    $('.login').html(userProfile.user.name);
+    //    $('#enterUserForm').css('display', 'none');
+    //    chatApp.renderAllUsers();
+    //  }
+
+
+        var storedLogin = JSON.parse(localStorage.getItem('userInfo'));
