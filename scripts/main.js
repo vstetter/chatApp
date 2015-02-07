@@ -3,11 +3,22 @@ $(document).ready(function(){
 
 
   // to delete bad data uncomment out this line and put in correct id from server
-  //  chitChatApp.deleteMessage('54d66dacddad9b03000001f6');
+  //  chitChatApp.deleteMessage('54d68196ddad9b030000024b');
    //
-  //  chitChatApp.deleteMessage('54d66a39ddad9b03000001bf');
-  //  chitChatApp.deleteMessage('54d66a1eddad9b03000001bc');
+  //  chitChatApp.deleteMessage('54d6819fddad9b030000024d');
+  //  chitChatApp.deleteMessage('54d66ec4ddad9b03000001fd');
    //
+   //
+  //  chitChatApp.deleteMessage('54d66eb6ddad9b03000001fc');
+   //
+  //   chitChatApp.deleteMessage('54d66d97ddad9b03000001f3');
+  //   chitChatApp.deleteMessage('54d66d35ddad9b03000001ea');
+   //
+   //
+  //   chitChatApp.deleteMessage('54d66d27ddad9b03000001e8');
+   //
+  //    chitChatApp.deleteMessage('54d66ad1ddad9b03000001c9');
+  //    chitChatApp.deleteMessage('54d66acaddad9b03000001c8');
    //
 
 
@@ -43,7 +54,7 @@ var chitChatApp = {
       };
 
       $(this).css('display', 'none');
-      $(this).parent().siblings('.container').addClass('active');
+      $(this).parent().parent().parent().siblings('.container').addClass('active');
       chitChatApp.createUser(userInfo);
 
     });
@@ -60,12 +71,15 @@ var chitChatApp = {
       event.preventDefault();
 
       var userNameParse = JSON.parse(localStorage.getItem('userInfo'));
+      var now = moment("YYYY-MM-DD HH:mm");
       var newMessage = {
         userMessage : $(this).siblings('input[name="newMessage"]').val(),
         userId: userNameParse.userId,
-        userName: userNameParse.userName
+        userName: userNameParse.userName,
+        date: now
 
       };
+      // var now = moment();
       console.log('new message event worked!');
 
 
@@ -186,7 +200,7 @@ var chitChatApp = {
         chitChatApp.renderMessage();
         var strMessage = JSON.stringify(data);
         localStorage.setItem('newMessage', strMessage);
-        
+
 
       },
       error: function(err) {
