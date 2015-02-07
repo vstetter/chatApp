@@ -3,12 +3,18 @@ $(document).ready(function(){
 
 
   // to delete bad data uncomment out this line and put in correct id from server
-  //  chitChatApp.deleteUser('54d55ed4b1cce403000001fb');
+  //  chitChatApp.deleteMessage('54d64ac7ddad9b0300000025');
+  //  chitChatApp.deleteMessage('54d64b44ddad9b0300000027');
+   //
+  //  chitChatApp.deleteMessage('54d64a3cddad9b0300000022');
+  //  chitChatApp.deleteMessage('54d6492fddad9b030000001f');
+   //
 
 
 
 });
 
+// var userMessage = {};
 
 var chitChatApp = {
 
@@ -30,11 +36,13 @@ var chitChatApp = {
       event.preventDefault();
       var userInfo = {
         userName: $(this).find('input[name="newUser"]').val(),
-        userId: $(this).closest('li').data('itemid'),
+        userId: $(this).closest('li').data('itemid')
         // userMessage:""
-        // $(this).css('display', 'none');
-        // $(this).siblings().addClass('active');
+
       };
+
+      $(this).css('display', 'none');
+      $(this).parent().siblings('.container').addClass('active');
       chitChatApp.createUser(userInfo);
 
     });
@@ -47,17 +55,17 @@ var chitChatApp = {
 
     });
 
-    $('.sendMessage').on('click', '.newMessage', function(event){
+    $('.newMessage').on('click', function(event){
       event.preventDefault();
 
       var userNameParse = JSON.parse(localStorage.getItem('userInfo'));
-
       var newMessage = {
-        userId: userNameParse._id,
-        userName: userNameParse.userName,
-        userMessage:$(this).children().children().find('input[name="newMessage"]').val()
+        userMessage : $(this).siblings('input[name="newMessage"]').val(),
+        userId: $(this).closest('li').data('itemid'),
+        userName: userNameParse.userName
+
       };
-      console.log('new message event worked!', userNameParse);
+      console.log('new message event worked!');
 
       chitChatApp.addMessage(newMessage);
     });
@@ -135,7 +143,7 @@ var chitChatApp = {
           markup += template(item);
         });
         console.log('IT WORKED!', markup);
-        $('.chatArea').html(markup);
+        $('.chatArea').prepend().html(markup);
       },
       error: function(err) {
         console.log(err);
@@ -162,7 +170,7 @@ var chitChatApp = {
     $.ajax({
       url: chitChatApp.config.url + "/chitChatMessage",
       data: userMessage,
-      type: "PUT",
+      type: "POST",
       success: function (data) {
         console.log(data);
         chitChatApp.renderMessage();
@@ -173,6 +181,8 @@ var chitChatApp = {
         console.log(err);
       }
     });
+    $('input').val('');
+
   },
 
   deleteMessage: function(userId) {
