@@ -5,17 +5,20 @@ body, h1, h2, h3, h4, h5, h6, p, a, ul, li {
 .login {
   position: fixed;
   top: 20%;
-  padding: 100px;
-  border-radius: 5%;
-  border: 6px double #260E0E; }
+  width: 400px;
+  height: 650px;
+  border: 1px solid;
+  margin: auto; }
 
 .loginForm {
-  text-align: center; }
+  text-align: center;
+  width: 900px;
+  margin: auto; }
 
 h1 {
   font-family: "prenton-condensed", sans-serif;
   color: #0D000D;
-  text-shadow: 0.25rem -0.25rem rgba(255, 0, 255, 0.75), -0.25rem -0.25rem rgba(0, 255, 255, 0.75), 0 0.5rem rgba(255, 255, 0, 0.75);
+  text-shadow: 0.25rem -0.25rem rgba(255, 0, 255, 0.75), -0.25rem -0.25rem rgba(59, 239, 182, 0.75), 0 0.5rem rgba(255, 255, 0, 0.75);
   text-align: center;
   font-size: 10em; }
 

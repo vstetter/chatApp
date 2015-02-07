@@ -6,21 +6,23 @@ body, h1, h2, h3, h4, h5, h6, p, a, ul, li {
 .login {
   position: fixed;
   top: 20%;
-  padding: 100px;
-  border-radius: 5%;
-  border: 6px double #260E0E;
-
+  width: 400px;
+  height: 650px;
+  border: 1px solid;
+  margin: auto;
 }
 
 .loginForm {
   text-align: center;
+  width: 900px;
+  margin: auto;
 }
 
 h1 {
   font-family: $head-font;
   color: $blue;
   text-shadow:  0.25rem -0.25rem rgba(magenta, 0.75),
-               -0.25rem -0.25rem rgba(cyan, 0.75),
+               -0.25rem -0.25rem rgba(59, 239, 182, 0.75),
                 0        0.5rem  rgba(yellow, 0.75);
   text-align: center;
   font-size: 10em;
