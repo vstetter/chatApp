@@ -43,7 +43,7 @@ var chitChatApp = {
       };
 
       $(this).css('display', 'none');
-      $(this).parent().siblings('.container').addClass('active');
+      $(this).parent().parent().parent().siblings('.container').addClass('active');
       chitChatApp.createUser(userInfo);
 
     });
@@ -186,7 +186,14 @@ var chitChatApp = {
         chitChatApp.renderMessage();
         var strMessage = JSON.stringify(data);
         localStorage.setItem('newMessage', strMessage);
-        
+        data.forEach(function(item, idx, arr){
+          messageArray.push(userMessage);
+
+
+        });
+
+        console.log(messageArray);
+
 
       },
       error: function(err) {
