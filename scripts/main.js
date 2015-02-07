@@ -3,25 +3,26 @@ $(document).ready(function(){
 
 
   // to delete bad data uncomment out this line and put in correct id from server
-  //  chitChatApp.deleteMessage('54d64ac7ddad9b0300000025');
-  //  chitChatApp.deleteMessage('54d64b44ddad9b0300000027');
+  //  chitChatApp.deleteMessage('54d66dacddad9b03000001f6');
    //
-  //  chitChatApp.deleteMessage('54d64a3cddad9b0300000022');
-  //  chitChatApp.deleteMessage('54d6492fddad9b030000001f');
+  //  chitChatApp.deleteMessage('54d66a39ddad9b03000001bf');
+  //  chitChatApp.deleteMessage('54d66a1eddad9b03000001bc');
+   //
    //
 
 
 
 });
 
-// var userMessage = {};
+var messageArray = [];
 
 var chitChatApp = {
 
   init: function(){
     chitChatApp.initEvents();
     chitChatApp.initStyling();
-    setInterval(chitChatApp.renderUser, 1000);
+    // setInterval(chitChatApp.renderUser, 1000);
+    // setInterval(chitChatApp.renderMessage, 1000);
   },
   initStyling: function(){
     chitChatApp.renderUser();
@@ -61,14 +62,23 @@ var chitChatApp = {
       var userNameParse = JSON.parse(localStorage.getItem('userInfo'));
       var newMessage = {
         userMessage : $(this).siblings('input[name="newMessage"]').val(),
-        userId: $(this).closest('li').data('itemid'),
+        userId: userNameParse.userId,
         userName: userNameParse.userName
 
       };
       console.log('new message event worked!');
 
+
       chitChatApp.addMessage(newMessage);
     });
+
+
+    // $('.chatArea').on('click', '.delete', function (event){
+    //     event.preventDefault();
+    //     var userId = $(this).closest('li').data('itemid');
+    //     chitChatApp.deleteMessage(userId);
+    //
+    // });
   },
 
 
@@ -133,7 +143,7 @@ var chitChatApp = {
 
   renderMessage: function() {
     $.ajax({
-      url: chitChatApp.config.url + "/chitChatMessage",
+      url: chitChatApp.config.url + "/chitChatMessage2",
       type: "GET",
       success: function (message) {
         console.log(message);
@@ -168,7 +178,7 @@ var chitChatApp = {
 
   addMessage: function(userMessage) {
     $.ajax({
-      url: chitChatApp.config.url + "/chitChatMessage",
+      url: chitChatApp.config.url + "/chitChatMessage2",
       data: userMessage,
       type: "POST",
       success: function (data) {
@@ -176,6 +186,8 @@ var chitChatApp = {
         chitChatApp.renderMessage();
         var strMessage = JSON.stringify(data);
         localStorage.setItem('newMessage', strMessage);
+        
+
       },
       error: function(err) {
         console.log(err);
@@ -187,7 +199,7 @@ var chitChatApp = {
 
   deleteMessage: function(userId) {
   $.ajax({
-    url: chitChatApp.config.url + "/chitChatMessage" + "/" + userId,
+    url: chitChatApp.config.url + "/chitChatMessage2" + "/" + userId,
     type: 'DELETE',
     success: function (data) {
       console.log(data);
