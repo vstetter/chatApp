@@ -5,7 +5,7 @@ templates.userList = [
 
 
 
-'<li data-itemid="<%= _id %>">',
+'<li rel="<%= userName %>" data-itemid="<%= _id %>">',
 '<h3 class="userName"><%= userName %></h3>',
 '<a class="logout" href="">Log Out</a>',
 '</li>'
@@ -17,7 +17,7 @@ templates.userList = [
 
 templates.messageTmpl = [
 '<li data-itemid="<%= _id %>">',
-'<p class="userMessage"><span class="user"><b><%=userName %></span>:</b> <%= userMessage %><span class="time"><%= date %></span></p>'
+'<p class="userMessage"><span class="user"><b><%=userName %></span>:</b> <%= userMessage %></p>'
 
 
 ].join("");
