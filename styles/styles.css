@@ -13,7 +13,8 @@ body, h1, h2, h3, h4, h5, h6, p, a, ul, li {
 .loginForm {
   text-align: center;
   width: 900px;
-  margin: auto; }
+  margin: auto;
+  display: none; }
 
 h1 {
   font-family: "prenton-condensed", sans-serif;

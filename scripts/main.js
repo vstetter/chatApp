@@ -159,7 +159,12 @@ var chitChatApp = {
     type: 'DELETE',
     success: function (data) {
       console.log(data);
+      localStorage.removeItem('userInfo');
+      $('.container').removeClass('active');
+      $('.loginForm').css('display', 'block');
+      $('.login').css('display', 'block');
       chitChatApp.renderUser();
+
     },
     error: function (err) {
       console.log(err);
