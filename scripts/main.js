@@ -41,8 +41,8 @@ var chitChatApp = {
     chitChatApp.initStyling();
     chitChatApp.userExists(); //skip login screen if user exists in local storage
 
-    // setInterval(chitChatApp.renderUser, 1000);
-    // setInterval(chitChatApp.renderMessage, 1000);
+    setInterval(chitChatApp.renderUser, 1000);
+    setInterval(chitChatApp.renderMessage, 1000);
   },
   initStyling: function(){
     chitChatApp.renderUser();

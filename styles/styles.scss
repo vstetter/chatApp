@@ -79,6 +79,8 @@ p {
   color: white;
   font-family: $p-font;
   font-size: 20px;
+  float: center;
+  width: 85%;
   &:focus {
     background-color: $secondary-color;
     color: black;
@@ -88,6 +90,18 @@ p {
     color: black;
     @include transition(all 1s ease);
 
+  }
+}
+
+.newMessage {
+  @extend #newUserSubmit;
+  width: 120px;
+  margin-top: 20px;
+  &:focus {
+    @extend #newUserSubmit:focus;
+  }
+  &:hover {
+    @extend #newUsersubmit:hover;
   }
 }
 
