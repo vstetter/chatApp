@@ -13,10 +13,11 @@ templates.userList = [
 
 ].join("");
 
-
+var now = moment();
 
 templates.messageTmpl = [
 '<li data-itemid="<%= _id %>">',
+'<p class="date"><%= now %><p>',
 '<p class="userMessage"><span class="user"><b><%=userName %></span>:</b> <%= userMessage %></p>'
 
 
